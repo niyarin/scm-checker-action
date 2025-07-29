@@ -1,5 +1,7 @@
 #!/bin/sh -l
 
+pwd
+
 BRANCH_NAME=${GITHUB_REF#refs/heads/}
 git config --global --add safe.directory /github/workspace
 
@@ -21,4 +23,6 @@ fi
 
 echo "FILES=" $FILES
 
-/usr/bin/gosh -I ./src -I ./src/scheme-reader/ script.scm $FILES
+pwd
+
+/usr/bin/gosh -I /scm-checker/src -I /scm-checker/src/scheme-reader/ /scm-checker/script.scm $(echo $FILES)
