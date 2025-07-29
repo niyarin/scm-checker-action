@@ -1,0 +1,15 @@
+name: 'scm-checker action'
+description: 'Get started with Container actions'
+author: 'niyarin'
+inputs:
+  github_token:
+    description: 'Github token to report linter results back to check'
+    required: true
+  base_sha:
+      description: 'Github base commit sha of push'
+      required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.base_sha }}
