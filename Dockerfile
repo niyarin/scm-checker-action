@@ -9,7 +9,11 @@ WORKDIR /
 RUN git clone https://github.com/niyarin/scm-checker
 WORKDIR /scm-checker
 RUN git submodule update --init
-#CMD ["/usr/bin/gosh", "-I", "./src", "-I", "./src/scheme-reader/", "src/main.scm", "-"]
+
+
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+COPY script.scm /scm-checker
+
 ENTRYPOINT ["/entrypoint.sh"]

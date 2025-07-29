@@ -20,3 +20,5 @@ else
 fi
 
 echo "FILES=" $FILES
+
+/usr/bin/gosh -I ./src -I ./src/scheme-reader/ script.scm $FILES
