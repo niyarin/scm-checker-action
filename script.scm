@@ -24,7 +24,7 @@
     (display (cdr pos-pair))
     (display " ")
     (display (w/code-warning->message warn))
-    (display " ")
+    (display "::")
     (write (w/code-warning->code warn))
     (display " =>")
     (for-each (lambda (x) (write x)) (w/code-warning->suggestion warn))
@@ -32,11 +32,9 @@
 
 (define (main)
   (let ((args (command-line)))
-    (for-each
-      (lambda (filename)
-        (for-each
-          (lambda (warn) (print-warn warn))
-          (check-file filename)))
-      (cdr args))))
+    (let ((warnings (append-map check-file (cdr args))))
+      (unless (null? warnings)
+        (for-each print-warn warnings)
+        (exit #f)))))
 
 (main)
