@@ -7,11 +7,18 @@
         (prefix (scm-check checkers) checkers/))
 
 (define (check-file filename)
-  (let-values (((code debug-info) (schk-rdr/read-super filename)))
-    (append-map
-      checkers/check-code
-      code
-      debug-info)))
+  (with-exception-handler
+    (lambda (err)
+      (display (string-append "Error: while checking " filename))
+      (newline)
+      (display err)
+      (newline))
+    (lambda ()
+      (let-values (((code debug-info) (schk-rdr/read-super filename)))
+        (append-map
+          checkers/check-code
+          code
+          debug-info)))))
 
 (define (print-warn warn)
   (let ((pos-pair (schk-rdr/position->pair (w/code-warning->pos warn)))
@@ -25,9 +32,10 @@
     (display "::")
     (display (w/code-warning->message warn))
     (display " ")
-    (write (w/code-warning->code warn))
-    (display " =>")
-    (for-each (lambda (x) (write x)) (w/code-warning->suggestion warn))
+    (when (w/code-warning->suggestion warn)
+      (write (w/code-warning->code warn))
+      (display " =>")
+      (for-each (lambda (x) (write x)) (w/code-warning->suggestion warn)))
     (newline)))
 
 (define (main)
