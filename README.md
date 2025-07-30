@@ -24,3 +24,8 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         base_sha: ${{ github.event.pull_request.base.sha||steps.main_base_sha.outputs.base_sha }}
 ```
+
+
+## Example output
+
+<img width="1507" height="641" alt="Screenshot from 2025-07-30 09-54-19" src="https://github.com/user-attachments/assets/665eac24-7bd3-476a-a6b9-b6be365e1297" />
