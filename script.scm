@@ -2,9 +2,9 @@
         (scheme base)
         (scheme write)
         (only (srfi 1) append-map)
-        (prefix (scm-check code-warning) w/)
-        (prefix (scm-check reader) schk-rdr/)
-        (prefix (scm-check checkers) checkers/))
+        (prefix (scm-checker code-warning) w/)
+        (prefix (scm-checker reader) schk-rdr/)
+        (prefix (scm-checker checkers) checkers/))
 
 (define (check-file filename)
   (with-exception-handler
