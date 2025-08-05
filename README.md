@@ -19,7 +19,7 @@ jobs:
       id : main_base_sha
       if : github.ref  == 'refs/heads/main'
       run: echo "base_sha=${{ github.event.before }}" >> $GITHUB_OUTPUT
-    - uses: niyarin/scm-checker-action@main
+    - uses: niyarin/scm-checker-action@0.1.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         base_sha: ${{ github.event.pull_request.base.sha||steps.main_base_sha.outputs.base_sha }}

@@ -6,7 +6,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
-RUN git clone https://github.com/niyarin/scm-checker
+RUN git clone https://github.com/niyarin/scm-checker -b 0.1.0
 WORKDIR /scm-checker
 RUN git submodule update --init
 
